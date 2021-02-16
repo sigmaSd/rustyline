@@ -35,6 +35,8 @@ pub enum Cmd {
     CompleteBackward,
     /// complete-hint
     CompleteHint,
+    /// Compose commands using a vector of commands
+    Composite(Vec<Cmd>),
     /// Dedent current line
     Dedent(Movement),
     /// downcase-word
@@ -698,6 +700,22 @@ impl InputState {
                 self.input_mode = InputMode::Insert;
                 wrt.doing_insert();
                 Cmd::Move(Movement::BeginningOfLine)
+            }
+            E(K::Char('o'), M::NONE) => {
+                // vi new line
+                self.input_mode = InputMode::Insert;
+                wrt.doing_insert();
+                Cmd::Composite(vec![Cmd::Move(Movement::EndOfLine), Cmd::Newline])
+            }
+            E(K::Char('O'), M::NONE) => {
+                // vi new line up
+                self.input_mode = InputMode::Insert;
+                wrt.doing_insert();
+                Cmd::Composite(vec![
+                    Cmd::Move(Movement::BeginningOfLine),
+                    Cmd::Newline,
+                    Cmd::Move(Movement::LineUp(1)),
+                ])
             }
             E(K::Char(c), M::NONE) if c == 'f' || c == 'F' || c == 't' || c == 'T' => {
                 // vi-char-search

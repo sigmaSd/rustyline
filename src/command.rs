@@ -29,6 +29,11 @@ pub fn execute<H: Helper>(
         Cmd::CompleteHint => {
             complete_hint_line(s)?;
         }
+        Cmd::Composite(cmds) => {
+            for cmd in cmds {
+                execute(cmd, s, input_state, kill_ring, config)?;
+            }
+        }
         Cmd::SelfInsert(n, c) => {
             s.edit_insert(c, n)?;
         }
