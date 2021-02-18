@@ -314,6 +314,8 @@ impl<'out, 'prompt, H: Helper> State<'out, 'prompt, H> {
     /// Insert the character `ch` at cursor current position.
     pub fn edit_insert(&mut self, ch: char, n: RepeatCount) -> Result<()> {
         if let Some(push) = self.line.insert(ch, n) {
+            self.backup();
+            self.ctx.history_index = self.ctx.history.len();
             if push {
                 let prompt_size = self.prompt_size;
                 let no_previous_hint = self.hint.is_none();
