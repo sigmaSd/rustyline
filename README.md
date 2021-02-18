@@ -1,3 +1,12 @@
+# Fork
+Some patches on top of rustyline
+
+- insert_tab: https://github.com/sigmaSd/rustyline/commit/64545abe886010d4b42d6c66aa541dc820848ee3
+
+- add edited line the top of the history stack https://github.com/sigmaSd/rustyline/commit/8a258a70eee931cc60ea79595869f23b51759e56
+
+- add colors X
+
 # RustyLine
 [![Build Status](https://github.com/kkawakam/rustyline/workflows/Rust/badge.svg)](https://github.com/kkawakam/rustyline/actions)
 [![dependency status](https://deps.rs/repo/github/kkawakam/rustyline/status.svg)](https://deps.rs/repo/github/kkawakam/rustyline)
