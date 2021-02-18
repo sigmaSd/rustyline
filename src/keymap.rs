@@ -374,6 +374,8 @@ pub trait Refresher {
     fn last_insert(&self) -> Option<String>;
     /// Returns `true` if the cursor is currently at the end of the line.
     fn is_cursor_at_end(&self) -> bool;
+    /// Returns `true` if the cursor is currently at a whitespace character.
+    fn is_cursor_at_whitespace(&self) -> bool;
     /// Returns `true` if there is a hint displayed.
     fn has_hint(&self) -> bool;
 }
@@ -517,7 +519,10 @@ impl InputState {
             }
             E(K::BackTab, M::NONE) => Cmd::CompleteBackward,
             E(K::Tab, M::NONE) => {
-                if positive {
+                if wrt.is_cursor_at_whitespace() {
+                    //Tab
+                    Cmd::SelfInsert(4, ' ')
+                } else if positive {
                     Cmd::Complete
                 } else {
                     Cmd::CompleteBackward
