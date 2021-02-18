@@ -17,6 +17,7 @@
 //! ```
 #![warn(missing_docs)]
 
+mod colors;
 mod command;
 pub mod completion;
 pub mod config;
@@ -58,6 +59,7 @@ pub use crate::keymap::{Anchor, At, CharSearch, Cmd, Movement, RepeatCount, Word
 use crate::keymap::{InputState, Refresher};
 pub use crate::keys::{KeyCode, KeyEvent, Modifiers};
 use crate::kill_ring::KillRing;
+pub use colors::Color;
 
 use crate::validate::Validator;
 
