@@ -40,7 +40,8 @@ pub trait Color {
     fn light_blue(&self) -> String;
     fn rgb(&self, r: u8, g: u8, b: u8) -> String;
 }
-impl Color for &str {
+
+impl Color for str {
     fn red(&self) -> String {
         color(&self, Palette::Red)
     }
@@ -60,4 +61,3 @@ impl Color for &str {
         color(&self, Palette::RGB(r, g, b))
     }
 }
-
